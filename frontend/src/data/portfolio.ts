@@ -71,7 +71,7 @@ export const experience = [
   {
     role: "Associate Backend Developer",
     company: "Cybrik Solutions",
-    period: "Apr 2026 — Sep 2026",
+    period: "Oct 2025 — Sep 2026",
     points: [
       "Cut p95 latency 40% on 3 high-traffic APIs with indexing, pooling and Redis caching.",
       "Containerized 4 production services; deployment time down 50%, manual release errors gone.",

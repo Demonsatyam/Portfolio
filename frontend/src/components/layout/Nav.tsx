@@ -27,7 +27,7 @@ export function Nav() {
         }`}
       >
         <a href="#top" className="font-display text-lg font-semibold tracking-tight">
-          satyam<span className="text-accent">.</span>
+          SATYAM
         </a>
         <ul className="hidden items-center gap-1 md:flex">
           {links.map((l) => (

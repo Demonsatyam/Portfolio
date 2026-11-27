@@ -12,10 +12,12 @@ type Props = {
   paused?: boolean;
   /** Called on every rendered frame — keep it cheap (e.g. set a MotionValue). */
   onFrame?: (frame: number) => void;
+  /** Share of the reel that must be on screen before it plays. */
+  threshold?: number;
 };
 
 /** Remotion composition that loops while on screen; reduced-motion users get a still frame. */
-export default function ReelPlayer({ id, label, paused = false, onFrame }: Props) {
+export default function ReelPlayer({ id, label, paused = false, onFrame, threshold = 0.2 }: Props) {
   const wrap = useRef<HTMLDivElement>(null);
   // State, not a ref: the Player's handle arrives after first render and the effects must re-run when it does.
   const [player, setPlayer] = useState<PlayerRef | null>(null);
@@ -46,14 +48,14 @@ export default function ReelPlayer({ id, label, paused = false, onFrame }: Props
         visible.current = e.isIntersecting;
         sync();
       },
-      { threshold: 0.2 },
+      { threshold },
     );
     io.observe(el);
     return () => {
       io.disconnect();
       p.removeEventListener("frameupdate", onUpdate);
     };
-  }, [player, still, onFrame]);
+  }, [player, still, onFrame, threshold]);
 
   return (
     <div ref={wrap} role="img" aria-label={label} className="aspect-video w-full overflow-hidden">

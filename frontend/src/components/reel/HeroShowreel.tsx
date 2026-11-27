@@ -46,6 +46,7 @@ export function HeroShowreel({ rotateX, scale }: { rotateX: MotionValue<number>;
         id="hero"
         paused={paused}
         onFrame={onFrame}
+        threshold={0.6}
         label="Motion-graphics showreel: a tap on a phone becomes an API request, travels through a gateway, services and databases, then latency and uptime metrics count up."
       />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 bg-gradient-to-t from-black/70 to-transparent p-3 pt-10 md:p-5 md:pt-14">

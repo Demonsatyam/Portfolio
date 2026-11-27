@@ -14,12 +14,13 @@ export function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.45], [0.88, 1]);
 
   return (
-    <section id="top" className="relative overflow-hidden px-4 pt-36 pb-24 md:pt-44">
+    <section id="top" className="relative overflow-hidden px-4 pb-24">
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-accent/20 blur-[140px]"
       />
-      <div className="relative mx-auto max-w-6xl text-center">
+      {/* Intro fills the first screen; the showreel waits below the fold. */}
+      <div className="relative mx-auto flex min-h-svh max-w-6xl flex-col items-center justify-center pt-20 pb-10 text-center">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -56,7 +57,7 @@ export function Hero() {
           </a>
         </motion.div>
       </div>
-      <div ref={ref} className="relative mx-auto mt-20 max-w-5xl [perspective:1200px]">
+      <div ref={ref} className="relative mx-auto max-w-5xl [perspective:1200px]">
         <HeroShowreel rotateX={rotateX} scale={scale} />
       </div>
     </section>
