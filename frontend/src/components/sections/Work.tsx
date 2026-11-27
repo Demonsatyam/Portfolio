@@ -4,6 +4,12 @@ import { Reel } from "@/components/reel/Reel";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { projects } from "@/data/portfolio";
 
+// projects with a full walkthrough page
+const pages: Partial<Record<(typeof projects)[number]["id"], { href: string; label: string }>> = {
+  citypulse: { href: "/city-pulse", label: "City Pulse" },
+  dpi: { href: "/dpi", label: "DPI Engine" },
+};
+
 const reelLabels = {
   identity: "Animation: records from five sources merge into one customer profile while query time drops from 450 to 120 milliseconds.",
   dpi: "Animation: network packets pass through a classifier and are sorted into protocol lanes.",
@@ -19,8 +25,8 @@ export function Work() {
           {projects.map((p, i) => (
             <article key={p.id} className="grid items-center gap-10 md:grid-cols-12">
               <Reveal className={`md:col-span-7 ${i % 2 ? "md:order-2" : ""}`}>
-                {p.id === "citypulse" ? (
-                  <Link href="/city-pulse" aria-label="City Pulse: open the full walkthrough" className="block overflow-hidden rounded-3xl border border-line transition-transform duration-500 hover:-translate-y-1">
+                {pages[p.id] ? (
+                  <Link href={pages[p.id]!.href} aria-label={`${pages[p.id]!.label}: open the full walkthrough`} className="block overflow-hidden rounded-3xl border border-line transition-transform duration-500 hover:-translate-y-1">
                     <Reel id={p.id} label={reelLabels[p.id]} />
                   </Link>
                 ) : (
@@ -41,8 +47,8 @@ export function Work() {
                   ))}
                 </ul>
                 <p className="mt-6 font-mono text-xs text-muted">{p.stack.join("  /  ")}</p>
-                {p.id === "citypulse" ? (
-                  <Link href="/city-pulse" className="group mt-8 inline-flex items-center gap-2 rounded-full bg-fg px-5 py-2.5 text-sm font-medium text-bg transition-transform hover:scale-[1.03] active:scale-95">
+                {pages[p.id] ? (
+                  <Link href={pages[p.id]!.href} className="group mt-8 inline-flex items-center gap-2 rounded-full bg-fg px-5 py-2.5 text-sm font-medium text-bg transition-transform hover:scale-[1.03] active:scale-95">
                     Explore the full walkthrough
                     <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
                   </Link>

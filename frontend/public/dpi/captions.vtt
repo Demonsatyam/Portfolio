@@ -1,0 +1,290 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:02.573
+USER: I'm opening YouTube.
+
+2
+00:00:02.573 --> 00:00:04.700
+USER: What happens behind the scenes?
+
+3
+00:00:05.667 --> 00:00:12.133
+Every time you open a website, watch a video, or send a message, something interesting happens behind the screen.
+
+4
+00:00:12.467 --> 00:00:15.300
+Your data travels across networks in the form of packets.
+
+5
+00:00:15.667 --> 00:00:18.500
+But how do we know what's actually moving through our network?
+
+6
+00:00:24.200 --> 00:00:26.567
+Think of a network packet as a digital envelope.
+
+7
+00:00:26.933 --> 00:00:34.100
+It contains information about where it came from, where it's going, how it should be delivered, and the actual data being transmitted.
+
+8
+00:00:34.733 --> 00:00:36.800
+Open it up, and you'll find layers.
+
+9
+00:00:37.133 --> 00:00:41.100
+The Ethernet header carries the hardware addresses for this hop on the local network.
+
+10
+00:00:41.467 --> 00:00:44.433
+The IP header holds the source and destination addresses.
+
+11
+00:00:44.800 --> 00:00:49.067
+The TCP header adds port numbers, and keeps the conversation in order.
+
+12
+00:00:49.400 --> 00:00:51.330
+And at the centre is the payload.
+
+13
+00:00:51.330 --> 00:00:52.967
+The actual application data.
+
+14
+00:00:54.567 --> 00:00:56.997
+ENGINEER: A firewall can see where a packet is going.
+
+15
+00:00:56.997 --> 00:00:58.467
+ENGINEER: But not always what it is.
+
+16
+00:00:58.800 --> 00:01:03.100
+A traditional firewall primarily evaluates packet headers and configured policies.
+
+17
+00:01:03.433 --> 00:01:06.191
+Here, it sees a connection to port 443.
+
+18
+00:01:06.191 --> 00:01:08.733
+Secure web traffic, but from which application?
+
+19
+00:01:09.400 --> 00:01:11.767
+Our Deep Packet Inspection Engine goes further.
+
+20
+00:01:12.133 --> 00:01:19.200
+It analyzes packet structure and supported application-layer information, to identify the traffic and apply intelligent filtering rules.
+
+21
+00:01:23.167 --> 00:01:27.422
+ENGINEER: We capture traffic with a tool like Wireshark, and save it as a PCAP file.
+
+22
+00:01:27.422 --> 00:01:30.700
+ENGINEER: The engine works on that recording, one packet at a time.
+
+23
+00:01:31.333 --> 00:01:43.333
+Our DPI Engine takes captured network traffic as input, processes each packet, identifies supported applications, checks configured blocking rules, and produces filtered traffic, along with a detailed processing report.
+
+24
+00:01:48.767 --> 00:01:51.042
+ENGINEER: Your browser generates network traffic.
+
+25
+00:01:51.042 --> 00:01:54.833
+ENGINEER: Our DPI Engine analyzes the packets to understand the connection.
+
+26
+00:01:55.467 --> 00:01:57.767
+Every packet enters through the PCAP Reader.
+
+27
+00:01:58.100 --> 00:02:05.200
+It reads the file's global header, then each packet's record header, with its timestamp and length, followed by the raw packet bytes.
+
+28
+00:02:05.867 --> 00:02:08.600
+The Packet Parser extracts the network information.
+
+29
+00:02:08.933 --> 00:02:11.022
+MAC addresses from Ethernet.
+
+30
+00:02:11.022 --> 00:02:14.005
+IP addresses and the protocol from IPv4.
+
+31
+00:02:14.005 --> 00:02:16.467
+And port numbers from TCP or UDP.
+
+32
+00:02:17.100 --> 00:02:22.733
+The engine then uses five important values, known as the Five-Tuple, to identify and track a connection.
+
+33
+00:02:23.067 --> 00:02:23.917
+Source IP.
+
+34
+00:02:23.917 --> 00:02:25.194
+Destination IP.
+
+35
+00:02:25.194 --> 00:02:26.214
+Source port.
+
+36
+00:02:26.214 --> 00:02:27.661
+Destination port.
+
+37
+00:02:27.661 --> 00:02:28.767
+And protocol.
+
+38
+00:02:29.133 --> 00:02:32.333
+Every packet with the same five values belongs to the same flow.
+
+39
+00:02:36.367 --> 00:02:41.256
+Before a browser and a server exchange encrypted data, they perform a TLS handshake.
+
+40
+00:02:41.256 --> 00:02:43.933
+The browser speaks first, with a Client Hello.
+
+41
+00:02:44.600 --> 00:02:53.500
+Even though HTTPS encrypts application data, a conventional TLS Client Hello may expose the requested hostname, through the Server Name Indication extension.
+
+42
+00:02:53.833 --> 00:02:58.833
+Our DPI Engine searches for this information, and maps recognized domains to application types.
+
+43
+00:02:59.600 --> 00:03:01.371
+The engine never decrypts anything.
+
+44
+00:03:01.371 --> 00:03:03.800
+Everything after the handshake stays unreadable.
+
+45
+00:03:04.167 --> 00:03:07.330
+SNI extraction needs a complete, parsable Client Hello.
+
+46
+00:03:07.330 --> 00:03:12.333
+And when the name is concealed by Encrypted Client Hello, there is no hostname to read.
+
+47
+00:03:12.667 --> 00:03:16.533
+For unencrypted web traffic, the engine reads the HTTP Host header instead.
+
+48
+00:03:21.967 --> 00:03:26.800
+Once the hostname is extracted, the engine compares it against known application signatures.
+
+49
+00:03:27.167 --> 00:03:31.800
+This allows the system to classify recognizable traffic into application categories.
+
+50
+00:03:32.333 --> 00:03:35.240
+Traffic it cannot recognize is simply labelled unknown.
+
+51
+00:03:35.240 --> 00:03:38.833
+And the result is stored on the flow, for every packet that follows.
+
+52
+00:03:43.567 --> 00:03:48.900
+ADMIN: Once the application is identified, we can apply the configured network policies.
+
+53
+00:03:49.533 --> 00:03:54.233
+The engine evaluates traffic against configured IP, application, and domain rules.
+
+54
+00:03:55.200 --> 00:04:02.400
+When a flow is identified as blocked, the engine marks that connection as blocked, and drops subsequent packets belonging to that flow.
+
+55
+00:04:03.033 --> 00:04:04.041
+Notice the timing.
+
+56
+00:04:04.041 --> 00:04:08.969
+The handshake packets were already forwarded, because the application was not known yet.
+
+57
+00:04:08.969 --> 00:04:11.433
+Blocking begins once the flow is identified.
+
+58
+00:04:16.167 --> 00:04:21.200
+To handle larger captures efficiently, the multithreaded version introduces parallel processing.
+
+59
+00:04:21.533 --> 00:04:26.833
+A Reader thread pulls packets from the file, and Load Balancers distribute them across Fast Path threads.
+
+60
+00:04:27.500 --> 00:04:34.433
+Consistent hashing ensures that packets belonging to the same connection reach the same processing thread, allowing the engine to maintain flow state.
+
+61
+00:04:34.767 --> 00:04:38.667
+Hash the Five-Tuple, and the same connection always lands on the same thread.
+
+62
+00:04:39.433 --> 00:04:41.767
+Between the stages sit thread-safe queues.
+
+63
+00:04:41.767 --> 00:04:45.100
+A producer pushes packets in, and a consumer takes them out.
+
+64
+00:04:45.433 --> 00:04:50.367
+A mutex guards the queue, and a condition variable wakes the consumer when work arrives.
+
+65
+00:04:50.733 --> 00:04:53.400
+Finally, the Output Writer thread collects the results.
+
+66
+00:04:59.767 --> 00:05:03.833
+After processing, the engine writes allowed packets into a filtered PCAP file.
+
+67
+00:05:04.200 --> 00:05:11.900
+And it generates a report containing packet statistics, application breakdowns, detected domains, and thread-level processing information.
+
+68
+00:05:12.633 --> 00:05:16.733
+ADMIN: Everything we forwarded, and everything we dropped, is accounted for.
+
+69
+00:05:26.367 --> 00:05:29.033
+So, this is our Deep Packet Inspection Engine.
+
+70
+00:05:29.400 --> 00:05:40.333
+It reads captured network traffic, understands packet structures, identifies supported applications, tracks connections, applies blocking rules, and produces filtered traffic with detailed reports.
+
+71
+00:05:41.267 --> 00:05:42.710
+It's not just about seeing packets.
+
+72
+00:05:42.710 --> 00:05:45.267
+It's about understanding the traffic moving through a network.
+

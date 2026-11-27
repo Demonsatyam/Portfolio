@@ -1,0 +1,63 @@
+# S01 The internet behind the screen
+U+0.6| I'm opening YouTube. What happens behind the scenes?
+N+0.6| Every time you open a website, watch a video, or send a message, something interesting happens behind the screen.
+N| Your data travels across networks in the form of packets.
+N| But how do we know what's actually moving through our network?
+# S02 What is a network packet
+N| Think of a network packet as a digital envelope.
+N| It contains information about where it came from, where it's going, how it should be delivered, and the actual data being transmitted.
+N+0.3| Open it up, and you'll find layers.
+N| The Ethernet header carries the hardware addresses for this hop on the local network.
+N| The IP header holds the source and destination addresses.
+N| The TCP header adds port numbers, and keeps the conversation in order.
+N| And at the centre is the payload. The actual application data.
+# S03 Why deep packet inspection
+E| A firewall can see where a packet is going. But not always what it is.
+N| A traditional firewall primarily evaluates packet headers and configured policies.
+N| Here, it sees a connection to port four four three. Secure web traffic, but from which application?
+N+0.3| Our Deep Packet Inspection Engine goes further.
+N| It analyzes packet structure and supported application-layer information, to identify the traffic and apply intelligent filtering rules.
+# S04 Architecture
+E| We capture traffic with a tool like Wireshark, and save it as a PCAP file. The engine works on that recording, one packet at a time.
+N+0.3| Our DPI Engine takes captured network traffic as input, processes each packet, identifies supported applications, checks configured blocking rules, and produces filtered traffic, along with a detailed processing report.
+# S05 Journey of a packet
+E| Your browser generates network traffic. Our DPI Engine analyzes the packets to understand the connection.
+N+0.3| Every packet enters through the PCAP Reader.
+N| It reads the file's global header, then each packet's record header, with its timestamp and length, followed by the raw packet bytes.
+N+0.3| The Packet Parser extracts the network information.
+N| MAC addresses from Ethernet. IP addresses and the protocol from IPv4. And port numbers from TCP or UDP.
+N+0.3| The engine then uses five important values, known as the Five-Tuple, to identify and track a connection.
+N| Source IP. Destination IP. Source port. Destination port. And protocol.
+N| Every packet with the same five values belongs to the same flow.
+# S06 SNI extraction
+N| Before a browser and a server exchange encrypted data, they perform a TLS handshake. The browser speaks first, with a Client Hello.
+N+0.3| Even though HTTPS encrypts application data, a conventional TLS Client Hello may expose the requested hostname, through the Server Name Indication extension.
+N| Our DPI Engine searches for this information, and maps recognized domains to application types.
+N+0.4| The engine never decrypts anything. Everything after the handshake stays unreadable.
+N| SNI extraction needs a complete, parsable Client Hello. And when the name is concealed by Encrypted Client Hello, there is no hostname to read.
+N| For unencrypted web traffic, the engine reads the HTTP Host header instead.
+# S07 Application classification
+N| Once the hostname is extracted, the engine compares it against known application signatures.
+N| This allows the system to classify recognizable traffic into application categories.
+N+0.2| Traffic it cannot recognize is simply labelled unknown. And the result is stored on the flow, for every packet that follows.
+# S08 Blocking
+A| Once the application is identified, we can apply the configured network policies.
+N+0.3| The engine evaluates traffic against configured IP, application, and domain rules.
+N+0.6| When a flow is identified as blocked, the engine marks that connection as blocked, and drops subsequent packets belonging to that flow.
+N+0.3| Notice the timing. The handshake packets were already forwarded, because the application was not known yet. Blocking begins once the flow is identified.
+# S09 Multithreading
+N| To handle larger captures efficiently, the multithreaded version introduces parallel processing.
+N| A Reader thread pulls packets from the file, and Load Balancers distribute them across Fast Path threads.
+N+0.3| Consistent hashing ensures that packets belonging to the same connection reach the same processing thread, allowing the engine to maintain flow state.
+N| Hash the Five-Tuple, and the same connection always lands on the same thread.
+N+0.4| Between the stages sit thread-safe queues. A producer pushes packets in, and a consumer takes them out.
+N| A mutex guards the queue, and a condition variable wakes the consumer when work arrives.
+N| Finally, the Output Writer thread collects the results.
+# S10 Output and report
+N| After processing, the engine writes allowed packets into a filtered PCAP file.
+N| And it generates a report containing packet statistics, application breakdowns, detected domains, and thread-level processing information.
+A+0.4| Everything we forwarded, and everything we dropped, is accounted for.
+# S11 Summary
+N| So, this is our Deep Packet Inspection Engine.
+N| It reads captured network traffic, understands packet structures, identifies supported applications, tracks connections, applies blocking rules, and produces filtered traffic with detailed reports.
+N+0.6| It's not just about seeing packets. It's about understanding the traffic moving through a network.
