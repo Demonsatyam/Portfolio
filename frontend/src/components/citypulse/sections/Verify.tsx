@@ -21,7 +21,7 @@ const ROWS: Record<State, { t: string; s: "ok" | "wait" | "no" }[]> = {
     { t: "Traffic data shows slowing", s: "ok" },
   ],
 };
-const MARK = { ok: ["✓", C.cyan, "#070D1A"], wait: ["…", "#33476B", "#fff"], no: ["✕", "#4A5570", "#fff"] } as const;
+const MARK = { ok: ["✓", C.cyan, "var(--cs-bg)"], wait: ["…", "var(--cs-line-strong)", "var(--cs-fg)"], no: ["✕", "var(--cs-line-strong)", "var(--cs-fg)"] } as const;
 const spring = { type: "spring", bounce: 0.1, visualDuration: 0.4 } as const;
 
 export function Verify() {
@@ -35,7 +35,7 @@ export function Verify() {
       <div className="grid gap-8 lg:grid-cols-12">
         <motion.div layout className="lg:col-span-7" transition={spring}>
           <Panel className="overflow-hidden" >
-            <motion.div className="px-6 py-3 font-mono text-xs font-bold tracking-[0.2em]" animate={{ backgroundColor: v ? "#3E1414" : "#3A2A0C", color: v ? "#FF8A8A" : C.amber }} transition={{ duration: 0.3 }}>
+            <motion.div className="px-6 py-3 font-mono text-xs font-bold tracking-[0.2em]" animate={{ backgroundColor: v ? "rgba(239,75,75,0.18)" : "rgba(245,165,36,0.14)", color: v ? C.red : C.amber }} transition={{ duration: 0.3 }}>
               {v ? "VERIFIED INCIDENT" : "POTENTIAL INCIDENT · UNDER ANALYSIS"}
             </motion.div>
             <div className="p-6">
@@ -45,7 +45,7 @@ export function Verify() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="font-display text-2xl font-semibold">Accident</p>
-                  <p className="text-[#8D9BB5]">Ring Road flyover</p>
+                  <p className="text-(--cs-muted)">Ring Road flyover</p>
                 </div>
                 <AnimatePresence>
                   {v ? (
@@ -61,7 +61,7 @@ export function Verify() {
                   return (
                     <motion.li key={st + r.t} className="flex items-center gap-3" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08, duration: 0.25 }}>
                       <span className="grid size-7 place-items-center rounded-full text-sm font-bold" style={{ background: bg, color: fg }}>{m}</span>
-                      <span className={r.s === "ok" ? "text-white" : "text-[#9fb0cc]"}>{r.t}</span>
+                      <span className={r.s === "ok" ? "text-(--cs-fg)" : "text-(--cs-sub)"}>{r.t}</span>
                     </motion.li>
                   );
                 })}
@@ -71,17 +71,17 @@ export function Verify() {
         </motion.div>
 
         <div className="lg:col-span-5">
-          <p className="mb-4 text-sm font-medium text-[#8D9BB5]">What happens next</p>
+          <p className="mb-4 text-sm font-medium text-(--cs-muted)">What happens next</p>
           <ol className="space-y-3">
             {["Predict impact", "Alert affected commuters", "Inform the nearest traffic station"].map((t, i) => (
-              <motion.li key={t} className="flex items-center gap-3 rounded-2xl border px-4 py-3" animate={{ opacity: v ? 1 : 0.4, borderColor: v ? "#2FCB6F66" : "#22314F" }} transition={{ delay: v ? i * 0.12 : 0, duration: 0.3 }}>
-                <span className="grid size-7 place-items-center rounded-full bg-[#13203A] text-xs font-bold">{i + 1}</span>
+              <motion.li key={t} className="flex items-center gap-3 rounded-2xl border px-4 py-3" style={{ borderColor: v ? "#2FCB6F66" : "var(--cs-line)", transition: "border-color 0.3s" }} animate={{ opacity: v ? 1 : 0.4 }} transition={{ delay: v ? i * 0.12 : 0, duration: 0.3 }}>
+                <span className="grid size-7 place-items-center rounded-full bg-(--cs-panel-2) text-xs font-bold">{i + 1}</span>
                 {t}
-                <span className="ml-auto text-xs" style={{ color: v ? C.green : "#8D9BB5" }}>{v ? "Proceeds" : "On hold"}</span>
+                <span className="ml-auto text-xs" style={{ color: v ? C.green : "var(--cs-muted)" }}>{v ? "Proceeds" : "On hold"}</span>
               </motion.li>
             ))}
           </ol>
-          <p className="mt-6 text-sm leading-relaxed text-[#8D9BB5]">
+          <p className="mt-6 text-sm leading-relaxed text-(--cs-muted)">
             In the film, a post claiming an accident on Lake Road is stopped here: its photo was two years old, the location didn&apos;t match and traffic was normal. No alert went out. <Demo>Demo</Demo>
           </p>
         </div>

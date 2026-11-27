@@ -14,7 +14,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${interTight.variable} ${mono.variable} antialiased`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${interTight.variable} ${mono.variable} antialiased`}>
+      <head>
+        {/* Apply the saved theme before first paint to avoid a flash. */}
+        <script
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="font-sans">{children}</body>
     </html>
   );

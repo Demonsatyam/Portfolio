@@ -34,13 +34,13 @@ export function Block() {
           <Panel className="p-5">
             <p className="mb-3 font-display text-lg font-semibold">Blocking rules</p>
             {RULES.map((r) => (
-              <label key={r.k} className="flex cursor-pointer items-center gap-3 border-t border-[#1a2747] py-3">
+              <label key={r.k} className="flex cursor-pointer items-center gap-3 border-t border-(--cs-line-soft) py-3">
                 <span className="min-w-0 flex-1">
                   <span className="block text-sm">{r.name}</span>
-                  <span className="font-mono text-xs text-[#8E9DBB]">{r.value}</span>
+                  <span className="font-mono text-xs text-(--cs-muted)">{r.value}</span>
                 </span>
                 <input type="checkbox" className="peer sr-only" checked={rules[r.k]} onChange={() => { setRules((x) => ({ ...x, [r.k]: !x[r.k] })); setRun((n) => n + 1); }} />
-                <span aria-hidden className={`relative h-6 w-11 rounded-full transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-[#00D4FF] ${rules[r.k] ? "bg-[#FF4545]" : "bg-[#22335A]"}`}>
+                <span aria-hidden className={`relative h-6 w-11 rounded-full transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-(--cs-accent) ${rules[r.k] ? "bg-[#FF4545]" : "bg-(--cs-line)"}`}>
                   <motion.span className="absolute top-1 size-4 rounded-full bg-white" animate={{ left: rules[r.k] ? 24 : 4 }} transition={{ type: "spring", bounce: 0.3, visualDuration: 0.25 }} />
                 </span>
               </label>
@@ -48,10 +48,10 @@ export function Block() {
           </Panel>
           <div role="radiogroup" aria-label="Connection" className="grid grid-cols-2 gap-2">
             {FLOWS.map((x) => (
-              <button key={x.id} type="button" role="radio" aria-checked={x.id === fid} onClick={() => { setFid(x.id); setRun((n) => n + 1); }} className={`rounded-2xl border px-3 py-3 text-left transition-colors ${x.id === fid ? "border-[#00D4FF] bg-[#00D4FF]/10" : "border-[#22335A] hover:border-[#3A4C74]"}`}>
+              <button key={x.id} type="button" role="radio" aria-checked={x.id === fid} onClick={() => { setFid(x.id); setRun((n) => n + 1); }} className={`rounded-2xl border px-3 py-3 text-left transition-colors ${x.id === fid ? "border-(--cs-accent) bg-(--cs-accent)/10" : "border-(--cs-line) hover:border-(--cs-line-strong)"}`}>
                 <span className="block text-sm font-medium">{x.label}</span>
-                <span className="block truncate font-mono text-[11px] text-[#8E9DBB]">{x.host}</span>
-                <span className="block font-mono text-[11px] text-[#5f6f8d]">from {x.src}</span>
+                <span className="block truncate font-mono text-[11px] text-(--cs-muted)">{x.host}</span>
+                <span className="block font-mono text-[11px] text-(--cs-dim)">from {x.src}</span>
               </button>
             ))}
           </div>
@@ -61,15 +61,15 @@ export function Block() {
           <Panel className="p-6 sm:p-8">
             <div className="mb-6 grid gap-2 sm:grid-cols-3">
               {gates.map((g, i) => (
-                <div key={g.q} className="rounded-xl border px-3 py-2.5" style={{ borderColor: g.hit ? D.red : "#1a2747", background: g.hit ? `${D.red}1A` : "transparent" }}>
-                  <p className="text-xs text-[#8E9DBB]">{i + 1}. {g.q}</p>
+                <div key={g.q} className="rounded-xl border px-3 py-2.5" style={{ borderColor: g.hit ? D.red : "var(--cs-line-soft)", background: g.hit ? `${D.red}1A` : "transparent" }}>
+                  <p className="text-xs text-(--cs-muted)">{i + 1}. {g.q}</p>
                   <p className="mt-1 font-mono text-sm" style={{ color: g.hit ? D.red : D.green }}>{g.hit ? "yes → block flow" : "no"}</p>
                 </div>
               ))}
             </div>
             <div className="mb-4 flex items-center justify-between">
-              <p className="font-mono text-xs text-[#8E9DBB]">flow · {f.src} → {f.host}:443</p>
-              <motion.span key={`${fid}-${run}-b`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: blocked ? (fromStart ? 0.2 : HELLO_AT * 0.35 + 0.4) : SEQ.length * 0.35 }} className="rounded-full px-3 py-1 text-xs font-bold" style={{ background: blocked ? D.red : D.green, color: D.bg }}>
+              <p className="font-mono text-xs text-(--cs-muted)">flow · {f.src} → {f.host}:443</p>
+              <motion.span key={`${fid}-${run}-b`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: blocked ? (fromStart ? 0.2 : HELLO_AT * 0.35 + 0.4) : SEQ.length * 0.35 }} className="rounded-full px-3 py-1 text-xs font-bold" style={{ background: blocked ? D.red : D.green, color: "var(--cs-bg)" }}>
                 {blocked ? "FLOW BLOCKED" : "FLOW ALLOWED"}
               </motion.span>
             </div>
@@ -85,7 +85,7 @@ export function Block() {
                 );
               })}
             </ol>
-            <p className="mt-6 text-sm leading-relaxed text-[#b4c2db]">
+            <p className="mt-6 text-sm leading-relaxed text-(--cs-soft)">
               {fromStart
                 ? "The source IP is in the first packet, so this flow is blocked from its very first packet."
                 : afterHello
@@ -93,7 +93,7 @@ export function Block() {
                   : "No rule matches this connection, so every packet is forwarded."}
             </p>
             <div className="mt-4 flex items-center justify-between">
-              <button type="button" onClick={() => setRun((n) => n + 1)} className="text-sm text-[#00D4FF] hover:underline">↻ Replay</button>
+              <button type="button" onClick={() => setRun((n) => n + 1)} className="text-sm text-(--cs-accent) hover:underline">↻ Replay</button>
               <Demo>Illustrative flow</Demo>
             </div>
           </Panel>

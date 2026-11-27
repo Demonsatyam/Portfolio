@@ -36,7 +36,7 @@ export function Packet() {
                 transition={spring}
                 onClick={() => setSel(l.id)}
                 aria-pressed={on}
-                className="absolute flex flex-col items-start justify-start rounded-2xl border-2 p-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:p-4"
+                className="absolute flex flex-col items-start justify-start rounded-2xl border-2 p-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--cs-fg) sm:p-4"
                 style={{ left: `${x}%`, top: `${y}%`, width: `${w}%`, height: `${h}%`, borderColor: l.color, background: `${l.color}${on ? "33" : "14"}`, boxShadow: on ? `0 0 40px ${l.color}66` : "none" }}
               >
                 <motion.span layout="position" className="block font-display text-sm font-semibold sm:text-lg">{l.name}</motion.span>
@@ -50,15 +50,15 @@ export function Packet() {
             <motion.div key={sel} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }}>
               <p className="font-mono text-xs uppercase tracking-[0.2em]" style={{ color: layer.color }}>{layer.name} · {layer.size}</p>
               <p className="mt-3 font-display text-2xl font-semibold">{layer.q}</p>
-              <dl className="mt-6 divide-y divide-[#1a2747]">
+              <dl className="mt-6 divide-y divide-(--cs-line-soft)">
                 {layer.fields.map(([k, v]) => (
                   <div key={k} className="flex items-baseline justify-between gap-4 py-2.5">
-                    <dt className="text-sm text-[#8E9DBB]">{k}</dt>
+                    <dt className="text-sm text-(--cs-muted)">{k}</dt>
                     <dd className="font-mono text-sm" style={{ color: layer.color }}>{v}</dd>
                   </div>
                 ))}
               </dl>
-              <p className="mt-6 break-words font-mono text-xs leading-relaxed text-[#5f6f8d]">{layer.bytes.join(" ")}{layer.id === "payload" ? " …" : ""}</p>
+              <p className="mt-6 break-words font-mono text-xs leading-relaxed text-(--cs-dim)">{layer.bytes.join(" ")}{layer.id === "payload" ? " …" : ""}</p>
             </motion.div>
           </AnimatePresence>
         </Panel>

@@ -10,7 +10,7 @@ export function Skills() {
         <SectionHeading eyebrow="Toolbox" title="Backend first. Mobile too." />
       </div>
       <div aria-hidden className="mb-16 overflow-hidden border-y border-line py-6 [mask-image:linear-gradient(90deg,transparent,black_15%,black_85%,transparent)]">
-        <div className="marquee flex w-max gap-12 font-display text-4xl font-semibold tracking-tight text-[#2b2b30] md:text-6xl">
+        <div className="marquee flex w-max gap-12 font-display text-4xl font-semibold tracking-tight text-(--marquee) md:text-6xl">
           {[...all, ...all].map((s, i) => (
             <span key={i}>{s}</span>
           ))}

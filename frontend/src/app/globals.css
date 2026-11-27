@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
 :root {
+  color-scheme: dark;
   --bg: #050505;
   --surface: #0f0f10;
   --line: #1f1f22;
@@ -8,6 +11,66 @@
   --muted: #8b8b92;
   --accent: #3d7bff;
   --accent-2: #a855f7;
+  --marquee: #2b2b30;
+  --chip: #a9c3ff;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --line: #e4e4e7;
+  --fg: #0a0a0b;
+  --muted: #5f5f67;
+  --accent: #2f6bf0;
+  --accent-2: #9333ea;
+  --marquee: #dcdce0;
+  --chip: #2f6bf0;
+}
+
+/* Case-study walkthroughs (City Pulse values; DPI overrides below). Illustrations keep their own palette. */
+:root {
+  --cs-bg: #070D1A;
+  --cs-panel: #0B1426;
+  --cs-panel-2: #13203A;
+  --cs-panel-3: #1c2d50;
+  --cs-line-soft: #1c2a47;
+  --cs-line: #22314F;
+  --cs-line-strong: #2E4470;
+  --cs-fg: #F4F7FB;
+  --cs-soft: #b4c2db;
+  --cs-sub: #9fb0cc;
+  --cs-muted: #8D9BB5;
+  --cs-dim: #5f6f8d;
+  --cs-accent: #38D3F0;
+}
+
+.cs-dpi {
+  --cs-bg: #070B16;
+  --cs-panel: #0C1426;
+  --cs-line-soft: #1a2747;
+  --cs-line: #22335A;
+  --cs-line-strong: #2A3D66;
+  --cs-fg: #ffffff;
+  --cs-muted: #8E9DBB;
+  --cs-accent: #00D4FF;
+}
+
+:root[data-theme="light"],
+:root[data-theme="light"] .cs-dpi {
+  --cs-bg: #F4F7FB;
+  --cs-panel: #FFFFFF;
+  --cs-panel-2: #E8EEF7;
+  --cs-panel-3: #DCE4F0;
+  --cs-line-soft: #E3E8F1;
+  --cs-line: #D6DEEA;
+  --cs-line-strong: #B8C4D8;
+  --cs-fg: #0B1426;
+  --cs-soft: #2E3B55;
+  --cs-sub: #3F4D69;
+  --cs-muted: #52607C;
+  --cs-dim: #7A879F;
+  --cs-accent: #0E7490;
 }
 
 @theme inline {

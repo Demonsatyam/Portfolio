@@ -13,11 +13,11 @@ export function Chapter({ id, title, intro, children, className = "" }: { id: Ch
     <section id={id} className={`scroll-mt-24 px-4 py-24 md:py-32 ${className}`}>
       <div className="mx-auto max-w-6xl">
         <Reveal className="mb-12 max-w-3xl">
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-[#00D4FF]">
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-(--cs-accent)">
             {String(n).padStart(2, "0")} · {CHAPTERS[n].label}
           </p>
           <h2 className="font-display text-[clamp(2rem,4.5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">{title}</h2>
-          {intro ? <p className="mt-5 text-lg leading-relaxed text-[#9fb0cc]">{intro}</p> : null}
+          {intro ? <p className="mt-5 text-lg leading-relaxed text-(--cs-sub)">{intro}</p> : null}
         </Reveal>
         {children}
       </div>
@@ -27,7 +27,7 @@ export function Chapter({ id, title, intro, children, className = "" }: { id: Ch
 
 /** Small mono chip. */
 export const Chip = ({ color, children, solid }: { color: string; children: ReactNode; solid?: boolean }) => (
-  <span className="inline-flex items-center whitespace-nowrap rounded-lg border px-2.5 py-1 font-mono text-xs" style={{ borderColor: color, background: solid ? color : `${color}1F`, color: solid ? "#070B16" : "#fff" }}>
+  <span className="inline-flex items-center whitespace-nowrap rounded-lg border px-2.5 py-1 font-mono text-xs" style={{ borderColor: color, background: solid ? color : `color-mix(in srgb, ${color} 12%, transparent)`, color: solid ? "var(--cs-bg)" : "var(--cs-fg)" }}>
     {children}
   </span>
 );

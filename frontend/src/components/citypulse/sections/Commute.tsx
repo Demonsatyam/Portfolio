@@ -31,9 +31,9 @@ export function Commute({ dest, setDest }: { dest: Dest; setDest: (d: Dest) => v
         <div ref={steps} className="md:col-span-5">
           {STEPS.map((st, i) => (
             <div key={i} className="flex min-h-[55vh] flex-col justify-center py-6 md:min-h-[70vh]">
-              <p className="font-mono text-xs text-[#8D9BB5]">Step {i + 1} / 3</p>
+              <p className="font-mono text-xs text-(--cs-muted)">Step {i + 1} / 3</p>
               <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight md:text-3xl">{st.h}</h3>
-              <p className="mt-3 leading-relaxed text-[#9fb0cc]">{st.p}</p>
+              <p className="mt-3 leading-relaxed text-(--cs-sub)">{st.p}</p>
               {i === 0 ? (
                 <div className="mt-6">
                   <Segmented
@@ -71,14 +71,14 @@ export function Commute({ dest, setDest }: { dest: Dest; setDest: (d: Dest) => v
               </CityMap>
               {/* commuter + their navigation status */}
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4">
-                <div className="flex items-center gap-3 rounded-2xl border border-[#22314F] bg-[#070D1A]/90 p-3 pr-5 backdrop-blur">
-                  <div className="size-16 shrink-0 overflow-hidden rounded-xl bg-gradient-to-b from-[#3d5a8a] to-[#d99a6a]">
+                <div className="flex items-center gap-3 rounded-2xl border border-(--cs-line) bg-(--cs-bg)/90 p-3 pr-5 backdrop-blur">
+                  <div className="size-16 shrink-0 overflow-hidden rounded-xl bg-gradient-to-b from-(--cs-line-strong) to-[#d99a6a]">
                     <Commuter pose="riding" style={{ width: 90, height: 82, marginLeft: -12, marginTop: -4 }} />
                   </div>
                   <div>
-                    <p className="text-xs text-[#8D9BB5]">Navigating · {DESTS[dest].label}</p>
+                    <p className="text-xs text-(--cs-muted)">Navigating · {DESTS[dest].label}</p>
                     <p className="font-display text-lg font-semibold">Usual route</p>
-                    <motion.p className="text-sm text-[#8D9BB5]" style={{ opacity: status }}>
+                    <motion.p className="text-sm text-(--cs-muted)" style={{ opacity: status }}>
                       No disruption reported yet
                     </motion.p>
                   </div>

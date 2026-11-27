@@ -19,7 +19,7 @@ function Diagram({ fp }: { fp: number }) {
   return (
     <svg viewBox="0 0 1020 460" className="w-full" role="img" aria-label={`Packets of the selected flow travel Reader, ${r.slice(1, 3).join(", ")}, Output Queue, Writer`}>
       {edges.map(([a, b]) => (
-        <line key={a + b} x1={N[a][0]} y1={N[a][1]} x2={N[b][0]} y2={N[b][1]} stroke={onRoute(a, b) ? D.purple : "#22335A"} strokeWidth={onRoute(a, b) ? 3 : 2} style={{ transition: "stroke 0.4s" }} />
+        <line key={a + b} x1={N[a][0]} y1={N[a][1]} x2={N[b][0]} y2={N[b][1]} stroke={onRoute(a, b) ? D.purple : "var(--cs-line)"} strokeWidth={onRoute(a, b) ? 3 : 2} style={{ transition: "stroke 0.4s" }} />
       ))}
       {[0, 1, 2, 3].map((k) => (
         <motion.circle key={`${fp}-${k}`} r={9} fill={D.purple} style={{ filter: `drop-shadow(0 0 6px ${D.purple})` }}
@@ -32,9 +32,9 @@ function Diagram({ fp }: { fp: number }) {
         const w = n === "Q" ? 150 : n.startsWith("FP") || n.startsWith("LB") ? 110 : 120;
         return (
           <g key={n} transform={`translate(${N[n][0] - w / 2} ${N[n][1] - 30})`}>
-            <rect width={w} height={60} rx={12} fill="#0C1426" stroke={on ? (n === "W" ? D.green : D.purple) : "#2A3D66"} strokeWidth={2} style={{ transition: "stroke 0.4s" }} />
+            <rect width={w} height={60} rx={12} fill="var(--cs-panel)" stroke={on ? (n === "W" ? D.green : D.purple) : "var(--cs-line-strong)"} strokeWidth={2} style={{ transition: "stroke 0.4s" }} />
             <text x={w / 2} y={27} textAnchor="middle" fill="#fff" fontSize={17} fontWeight={600}>{BOX[n][0]}</text>
-            <text x={w / 2} y={45} textAnchor="middle" fill="#8E9DBB" fontSize={11} fontFamily="var(--font-mono)">{BOX[n][1]}</text>
+            <text x={w / 2} y={45} textAnchor="middle" fill="var(--cs-muted)" fontSize={11} fontFamily="var(--font-mono)">{BOX[n][1]}</text>
           </g>
         );
       })}
@@ -71,20 +71,20 @@ function Queue() {
   return (
     <div ref={ref}>
       <div className="flex flex-wrap items-center gap-4">
-        <button type="button" onClick={produce} className="rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#070B16] transition-transform active:scale-95">Produce a packet</button>
-        <span className="rounded-full border px-3 py-1 font-mono text-xs" style={{ borderColor: lock === "free" ? "#22335A" : D.amber, color: lock === "free" ? D.mute : D.amber }}>mutex · {lock === "free" ? "free" : `held by ${lock}`}</span>
+        <button type="button" onClick={produce} className="rounded-full bg-(--cs-fg) px-5 py-2.5 text-sm font-medium text-(--cs-bg) transition-transform active:scale-95">Produce a packet</button>
+        <span className="rounded-full border px-3 py-1 font-mono text-xs" style={{ borderColor: lock === "free" ? "var(--cs-line)" : D.amber, color: lock === "free" ? "var(--cs-muted)" : D.amber }}>mutex · {lock === "free" ? "free" : `held by ${lock}`}</span>
       </div>
-      <div className="mt-5 flex h-16 items-center gap-2 rounded-2xl border-2 px-3" style={{ borderColor: lock === "free" ? "#22335A" : D.amber, transition: "border-color 0.2s" }}>
+      <div className="mt-5 flex h-16 items-center gap-2 rounded-2xl border-2 px-3" style={{ borderColor: lock === "free" ? "var(--cs-line)" : D.amber, transition: "border-color 0.2s" }}>
         <AnimatePresence initial={false} mode="popLayout">
           {items.map((n) => (
-            <motion.span key={n} layout initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 40 }} transition={{ type: "spring", bounce: 0.15, visualDuration: 0.3 }} className="grid h-10 w-14 place-items-center rounded-lg border border-[#00D4FF] bg-[#00D4FF]/15 font-mono text-xs">
+            <motion.span key={n} layout initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 40 }} transition={{ type: "spring", bounce: 0.15, visualDuration: 0.3 }} className="grid h-10 w-14 place-items-center rounded-lg border border-(--cs-accent) bg-(--cs-accent)/15 font-mono text-xs">
               #{n}
             </motion.span>
           ))}
         </AnimatePresence>
-        {items.length === 0 ? <span className="text-sm text-[#5f6f8d]">empty</span> : null}
+        {items.length === 0 ? <span className="text-sm text-(--cs-dim)">empty</span> : null}
       </div>
-      <p className="mt-3 font-mono text-xs text-[#8E9DBB]" aria-live="polite">{items.length === 0 ? "consumer waiting on condition variable" : log}</p>
+      <p className="mt-3 font-mono text-xs text-(--cs-muted)" aria-live="polite">{items.length === 0 ? "consumer waiting on condition variable" : log}</p>
     </div>
   );
 }
@@ -99,14 +99,14 @@ export function Threads() {
       </div>
       <Panel className="overflow-x-auto p-4 sm:p-8">
         <div className="min-w-[640px]"><Diagram fp={fp} /></div>
-        <p className="mt-4 font-mono text-sm text-[#b4c2db]">
+        <p className="mt-4 font-mono text-sm text-(--cs-soft)">
           hash(<span className="text-[#795CFF]">{flow}</span>) % 4 = <span className="font-bold text-[#795CFF]">{fp}</span> → every packet of this flow goes to FP{fp}
         </p>
       </Panel>
       <div className="mt-10 grid gap-8 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <p className="font-display text-2xl font-semibold">Thread-safe queues between stages</p>
-          <p className="mt-3 leading-relaxed text-[#9fb0cc]">A producer pushes packets in, a consumer takes them out. A mutex guards the queue so only one thread touches it at a time, and a condition variable wakes the consumer when work arrives instead of letting it spin.</p>
+          <p className="mt-3 leading-relaxed text-(--cs-sub)">A producer pushes packets in, a consumer takes them out. A mutex guards the queue so only one thread touches it at a time, and a condition variable wakes the consumer when work arrives instead of letting it spin.</p>
         </div>
         <Panel className="p-6 lg:col-span-7"><Queue /></Panel>
       </div>

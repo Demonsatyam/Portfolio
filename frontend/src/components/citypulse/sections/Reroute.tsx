@@ -49,7 +49,7 @@ export function Reroute({ dest, kind }: { dest: Dest; kind: IncidentKind }) {
               ) : null
             }
           </CityMap>
-          <ul className="absolute left-4 top-4 space-y-1.5 rounded-2xl border border-[#22314F] bg-[#070D1A]/85 p-3 text-xs backdrop-blur">
+          <ul className="absolute left-4 top-4 space-y-1.5 rounded-2xl border border-(--cs-line) bg-(--cs-bg)/85 p-3 text-xs backdrop-blur">
             {[
               [alt ? "#7a3a3a" : C.blue, "Original route"],
               [C.red, "Verified incident"],
@@ -62,18 +62,18 @@ export function Reroute({ dest, kind }: { dest: Dest; kind: IncidentKind }) {
         </Panel>
 
         <div className="flex flex-col gap-4 lg:col-span-4">
-          <motion.div initial={{ opacity: 0, y: -20 }} animate={seen ? { opacity: 1, y: 0 } : {}} transition={{ type: "spring", bounce: 0.2, visualDuration: 0.5, delay: 1.2 }} className="rounded-3xl bg-[#F7F8FB] p-5 text-[#141B2B] shadow-2xl">
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={seen ? { opacity: 1, y: 0 } : {}} transition={{ type: "spring", bounce: 0.2, visualDuration: 0.5, delay: 1.2 }} className="rounded-3xl bg-(--cs-fg) p-5 text-(--cs-panel-2) shadow-2xl">
             <p className="flex items-center gap-2 text-[11px] font-extrabold tracking-[0.15em] text-[#B26B00]">
               <span className="grid size-5 place-items-center rounded-md bg-[#F5A524] text-[#1A1206]">!</span> TRAFFIC ALERT · CITY PULSE
             </p>
             <p className="mt-2 font-display text-lg font-semibold leading-snug">Potential disruption ahead on your daily route</p>
-            <p className="mt-1 text-sm text-[#3B4660]">{INCIDENTS[kind].title}.</p>
-            <p className="mt-0.5 text-xs text-[#6A7590]">Est. delay {INCIDENTS[kind].delay} · simulated</p>
+            <p className="mt-1 text-sm text-(--cs-line-strong)">{INCIDENTS[kind].title}.</p>
+            <p className="mt-0.5 text-xs text-(--cs-dim)">Est. delay {INCIDENTS[kind].delay} · simulated</p>
             <button
               type="button"
               onClick={() => setAlt((a) => !a)}
               aria-pressed={alt}
-              className="mt-4 w-full rounded-xl bg-[#13203A] py-3 text-sm font-semibold text-white transition hover:bg-[#1c2d50] active:scale-[0.98]"
+              className="mt-4 w-full rounded-xl bg-(--cs-panel-2) py-3 text-sm font-semibold text-(--cs-fg) transition hover:bg-(--cs-panel-3) active:scale-[0.98]"
             >
               {alt ? "Back to original route" : "Show alternative route"}
             </button>
@@ -82,12 +82,12 @@ export function Reroute({ dest, kind }: { dest: Dest; kind: IncidentKind }) {
           <AnimatePresence>
             {alt ? (
               <motion.div key="cmp" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-                <div className="space-y-2 rounded-3xl border border-[#22314F] bg-[#0B1426] p-4">
+                <div className="space-y-2 rounded-3xl border border-(--cs-line) bg-(--cs-panel) p-4">
                   {[
                     ["Original route", `+${INCIDENTS[kind].delay.replace("~", "")}`, C.red, false],
                     ["Alternative", "+3 min", C.green, true],
                   ].map(([n, t, c, rec]) => (
-                    <div key={n as string} className="flex items-center gap-3 rounded-2xl border px-4 py-3" style={{ borderColor: rec ? `${C.green}88` : "#26365A", background: rec ? "#10291f" : undefined }}>
+                    <div key={n as string} className="flex items-center gap-3 rounded-2xl border px-4 py-3" style={{ borderColor: rec ? `${C.green}88` : "var(--cs-line-strong)", background: rec ? `${C.green}1F` : undefined }}>
                       <span className="size-2.5 rounded-full" style={{ background: c as string }} />
                       <span className="flex-1 text-sm font-medium">
                         {n}
@@ -101,7 +101,7 @@ export function Reroute({ dest, kind }: { dest: Dest; kind: IncidentKind }) {
               </motion.div>
             ) : null}
           </AnimatePresence>
-          <p className="text-sm leading-relaxed text-[#8D9BB5]">Only commuters subscribed to an affected route are alerted, so the notification is about <em>their</em> journey, not the whole city.</p>
+          <p className="text-sm leading-relaxed text-(--cs-muted)">Only commuters subscribed to an affected route are alerted, so the notification is about <em>their</em> journey, not the whole city.</p>
         </div>
       </div>
     </Chapter>

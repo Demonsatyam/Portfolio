@@ -43,7 +43,7 @@ export function Work() {
                 <p className="mt-4 text-muted">{p.blurb}</p>
                 <ul className="mt-6 flex flex-wrap gap-2">
                   {p.metrics.map((m) => (
-                    <li key={m} className="rounded-full bg-accent/10 px-3 py-1 text-sm text-[#a9c3ff]">{m}</li>
+                    <li key={m} className="rounded-full bg-accent/10 px-3 py-1 text-sm text-(--chip)">{m}</li>
                   ))}
                 </ul>
                 <p className="mt-6 font-mono text-xs text-muted">{p.stack.join("  /  ")}</p>

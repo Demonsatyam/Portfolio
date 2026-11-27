@@ -24,7 +24,7 @@ export function Simulate({ kind, setKind }: { kind: IncidentKind; setKind: (k: I
     { h: "Signals arrive", c: C.blue, body: <List items={inc.signals} /> },
     { h: "Agents analyse", c: C.cyan, body: <p>Social Feed clusters the posts · User Report reads the media · Sentiment weighs the tone</p> },
     { h: "Cross-checked", c: C.cyan, body: <List items={inc.checks} tick /> },
-    { h: "Verified incident", c: C.red, body: <p className="font-medium text-white">{inc.title}</p> },
+    { h: "Verified incident", c: C.red, body: <p className="font-medium text-(--cs-fg)">{inc.title}</p> },
     { h: "Impact predicted", c: C.amber, body: <p>{inc.impact}</p> },
     {
       h: "People alerted",
@@ -51,9 +51,9 @@ export function Simulate({ kind, setKind }: { kind: IncidentKind; setKind: (k: I
                   aria-checked={on}
                   onClick={() => pick(k)}
                   whileTap={{ scale: 0.97 }}
-                  className={`flex items-center gap-3 rounded-2xl border px-4 py-4 text-left transition-colors focus-visible:outline-2 focus-visible:outline-[#38D3F0] ${on ? "border-[#F5A524] bg-[#2a1e08]" : "border-[#22314F] bg-[#0B1426] hover:border-[#33476B]"}`}
+                  className={`flex items-center gap-3 rounded-2xl border px-4 py-4 text-left transition-colors focus-visible:outline-2 focus-visible:outline-(--cs-accent) ${on ? "border-[#F5A524] bg-[#F5A524]/12" : "border-(--cs-line) bg-(--cs-panel) hover:border-(--cs-line-strong)"}`}
                 >
-                  <svg viewBox="0 0 24 24" className="size-7 shrink-0" fill="none" stroke={on ? C.amber : "#8D9BB5"} strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <svg viewBox="0 0 24 24" className="size-7 shrink-0" fill="none" stroke={on ? C.amber : "var(--cs-muted)"} strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     {ICON[k]}
                   </svg>
                   <span className="font-medium">{INCIDENTS[k].label}</span>
@@ -61,7 +61,7 @@ export function Simulate({ kind, setKind }: { kind: IncidentKind; setKind: (k: I
               );
             })}
           </div>
-          <button type="button" onClick={() => setRun((r) => r + 1)} className="mt-4 text-sm text-[#38D3F0] hover:underline">
+          <button type="button" onClick={() => setRun((r) => r + 1)} className="mt-4 text-sm text-(--cs-accent) hover:underline">
             ↻ Replay
           </button>
         </div>
@@ -75,9 +75,9 @@ export function Simulate({ kind, setKind }: { kind: IncidentKind; setKind: (k: I
             <motion.span aria-hidden className="absolute bottom-3 left-[11px] top-3 w-0.5 origin-top bg-gradient-to-b from-[#4C8DFF] via-[#EF4B4B] to-[#2FCB6F]" initial={{ scaleY: 0 }} whileInView={{ scaleY: 1 }} viewport={{ once: true }} transition={{ duration: steps.length * 0.45, ease: "linear" }} />
             {steps.map((s, i) => (
               <motion.li key={s.h} className="relative pl-10" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.45, duration: 0.35 }}>
-                <span className="absolute left-0 top-0.5 grid size-6 place-items-center rounded-full text-[11px] font-bold text-[#070D1A]" style={{ background: s.c }}>{i + 1}</span>
+                <span className="absolute left-0 top-0.5 grid size-6 place-items-center rounded-full text-[11px] font-bold text-(--cs-bg)" style={{ background: s.c }}>{i + 1}</span>
                 <p className="font-semibold" style={{ color: s.c }}>{s.h}</p>
-                <div className="mt-1 text-sm leading-relaxed text-[#b4c2db]">{s.body}</div>
+                <div className="mt-1 text-sm leading-relaxed text-(--cs-soft)">{s.body}</div>
               </motion.li>
             ))}
           </ol>
@@ -92,7 +92,7 @@ function List({ items, tick }: { items: string[]; tick?: boolean }) {
     <ul className="space-y-1">
       {items.map((t) => (
         <li key={t} className="flex gap-2">
-          <span className={tick ? "text-[#38D3F0]" : "text-[#4C8DFF]"}>{tick ? "✓" : "•"}</span>
+          <span className={tick ? "text-(--cs-accent)" : "text-[#4C8DFF]"}>{tick ? "✓" : "•"}</span>
           {t}
         </li>
       ))}

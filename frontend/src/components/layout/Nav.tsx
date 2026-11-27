@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useState } from "react";
 import { profile } from "@/data/portfolio";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const links = [
   { href: "#work", label: "Work" },
@@ -39,6 +40,7 @@ export function Nav() {
           ))}
         </ul>
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <a
             href={profile.resume}
             target="_blank"

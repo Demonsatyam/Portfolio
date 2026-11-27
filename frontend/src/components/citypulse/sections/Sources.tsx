@@ -23,7 +23,7 @@ export function Sources() {
     <Chapter id="sources" title="Listening to the city, around the clock." intro="Every post, photo, video and report could be an early signal. City Pulse gathers them continuously, alongside live traffic and weather data, even while the city sleeps.">
       <div className="grid gap-8 lg:grid-cols-12">
         <Panel className="relative overflow-hidden lg:col-span-7">
-          <div aria-hidden className="absolute inset-0 opacity-40" style={{ backgroundImage: "linear-gradient(#1a2a4a 1px, transparent 1px), linear-gradient(90deg, #1a2a4a 1px, transparent 1px)", backgroundSize: "48px 48px", maskImage: "radial-gradient(circle at 50% 50%, black, transparent 75%)" }} />
+          <div aria-hidden className="absolute inset-0 opacity-40" style={{ backgroundImage: "linear-gradient(var(--cs-line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--cs-line-soft) 1px, transparent 1px)", backgroundSize: "48px 48px", maskImage: "radial-gradient(circle at 50% 50%, black, transparent 75%)" }} />
           <div className="relative aspect-[4/5] w-full sm:aspect-[16/10]">
             <svg viewBox="0 0 960 600" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden>
               {SRC.map((s, i) => {
@@ -46,7 +46,7 @@ export function Sources() {
               return (
                 <motion.div
                   key={s.name}
-                  className="absolute max-w-[42%] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-[#2E4470] bg-[#13203A] px-2.5 py-1.5 text-center text-[11px] font-medium leading-tight sm:max-w-none sm:whitespace-nowrap sm:px-3 sm:py-2 sm:text-sm"
+                  className="absolute max-w-[42%] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-(--cs-line-strong) bg-(--cs-panel-2) px-2.5 py-1.5 text-center text-[11px] font-medium leading-tight sm:max-w-none sm:whitespace-nowrap sm:px-3 sm:py-2 sm:text-sm"
                   style={{ left: `${(x / 960) * 100}%`, top: `${(y / 600) * 100}%` }}
                   initial={{ opacity: 0, scale: 0.85 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -62,17 +62,17 @@ export function Sources() {
               <AgentNode id="router" t={0.6} size={110} active={0.8} label={false} />
             </div>
             {/* the clock never stops */}
-            <div className="absolute bottom-4 left-4 hidden items-center gap-3 rounded-2xl sm:flex border border-[#22314F] bg-[#070D1A]/80 px-3 py-2">
+            <div className="absolute bottom-4 left-4 hidden items-center gap-3 rounded-2xl sm:flex border border-(--cs-line) bg-(--cs-bg)/80 px-3 py-2">
               <svg width={36} height={36} viewBox="-20 -20 40 40" aria-hidden>
-                <circle r={17} fill="none" stroke="#26365A" strokeWidth={3} />
+                <circle r={17} fill="none" stroke="var(--cs-line-strong)" strokeWidth={3} />
                 <g className="origin-center motion-safe:animate-[spin_6s_linear_infinite]">
-                  <line y2={-13} stroke="#fff" strokeWidth={2.5} strokeLinecap="round" />
+                  <line y2={-13} stroke="var(--cs-fg)" strokeWidth={2.5} strokeLinecap="round" />
                 </g>
-                <circle r={2.5} fill="#fff" />
+                <circle r={2.5} fill="var(--cs-fg)" />
               </svg>
               <div>
                 <p className="font-display text-lg font-semibold leading-none">24/7</p>
-                <p className="text-xs text-[#8D9BB5]">continuous monitoring</p>
+                <p className="text-xs text-(--cs-muted)">continuous monitoring</p>
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@ export function Sources() {
           ))}
         </div>
       </div>
-      <p className="mt-6 text-sm text-[#8D9BB5]">Posts shown are illustrated demo content, not real accounts.</p>
+      <p className="mt-6 text-sm text-(--cs-muted)">Posts shown are illustrated demo content, not real accounts.</p>
     </Chapter>
   );
 }

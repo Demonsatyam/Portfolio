@@ -21,8 +21,8 @@ export function CityPulse() {
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 40 });
 
   return (
-    <div className="min-h-screen bg-[#070D1A] text-[#F4F7FB]">
-      <motion.div aria-hidden className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-[#38D3F0]" style={{ scaleX: progress }} />
+    <div className="min-h-screen bg-(--cs-bg) text-(--cs-fg)">
+      <motion.div aria-hidden className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-(--cs-accent)" style={{ scaleX: progress }} />
       <Header />
       <Rail />
       <main>
@@ -65,8 +65,8 @@ function Rail() {
           const on = c.id === active;
           return (
             <li key={c.id}>
-              <a href={`#${c.id}`} aria-current={on ? "true" : undefined} className={`group flex items-center gap-3 rounded-lg px-2 py-1 text-xs transition-colors ${on ? "text-white" : "text-[#5f6f8d] hover:text-[#b4c2db]"}`}>
-                <span className={`h-px transition-all duration-300 ${on ? "w-8 bg-[#38D3F0]" : "w-4 bg-current"}`} />
+              <a href={`#${c.id}`} aria-current={on ? "true" : undefined} className={`group flex items-center gap-3 rounded-lg px-2 py-1 text-xs transition-colors ${on ? "text-(--cs-fg)" : "text-(--cs-dim) hover:text-(--cs-soft)"}`}>
+                <span className={`h-px transition-all duration-300 ${on ? "w-8 bg-(--cs-accent)" : "w-4 bg-current"}`} />
                 <span className="font-mono">{String(i).padStart(2, "0")}</span>
                 <span className={on ? "" : "opacity-0 transition-opacity group-hover:opacity-100"}>{c.label}</span>
               </a>
