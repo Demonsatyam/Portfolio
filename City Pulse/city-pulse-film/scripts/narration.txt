@@ -1,0 +1,11 @@
+Every day, millions of people follow the same routes. The same roads. The same routines. [[slnc 450]] But what happens when something unexpected happens along the way?
+An accident. [[slnc 200]] A road closure. [[slnc 200]] Heavy rainfall. [[slnc 200]] A sudden disruption. [[slnc 300]] By the time conventional navigation detects the problem, commuters may already be trapped in congestion.
+Introducing City Pulse. [[slnc 280]] An intelligent, multi-agent system designed to detect, validate, and anticipate traffic disruptions, before they affect your journey.
+Working around the clock, the platform continuously gathers information from public sources, social media, traffic services, weather data, and community reports. [[slnc 280]] Every post, image, video, and report could contain an early signal of a developing traffic incident.
+Instead of relying on a single source, specialised AI agents work together. [[slnc 250]] One analyses social feeds. Another understands images and videos. Others identify patterns, sentiment, and relevant information. [[slnc 280]] Together, they transform scattered information into actionable intelligence.
+But not every report is reliable. [[slnc 280]] The system cross-checks information, verifies the location, evaluates supporting evidence, and filters out false or irrelevant reports. [[slnc 280]] Only credible incidents move forward for further analysis.
+Once an incident is verified, the predictive agent analyses traffic, weather, and surrounding conditions to estimate its potential impact. [[slnc 250]] It identifies which routes may be affected, and who needs to know.
+Before you reach the disruption, you receive a personalised notification. [[slnc 280]] Your affected route is highlighted, and an alternative is recommended, helping you make a better decision before traffic builds around you.
+And the intelligence doesn't stop with the commuter. [[slnc 280]] Verified incident information is also shared with the nearest relevant traffic control station, helping authorities respond earlier, and make informed decisions.
+From scattered information, to verified intelligence. [[slnc 250]] From reactive traffic updates, to proactive awareness. [[slnc 250]] One connected intelligence system, helping commuters and cities move smarter.
+City Pulse. [[slnc 300]] Know before you go.

@@ -1,0 +1,63 @@
+{
+  "fps": 30,
+  "lead": 11,
+  "trans": 10,
+  "scenes": [
+    {
+      "vo": 240,
+      "frames": 270,
+      "start": 0
+    },
+    {
+      "vo": 313,
+      "frames": 340,
+      "start": 260
+    },
+    {
+      "vo": 257,
+      "frames": 284,
+      "start": 590
+    },
+    {
+      "vo": 439,
+      "frames": 466,
+      "start": 864
+    },
+    {
+      "vo": 498,
+      "frames": 525,
+      "start": 1320
+    },
+    {
+      "vo": 381,
+      "frames": 408,
+      "start": 1835
+    },
+    {
+      "vo": 321,
+      "frames": 348,
+      "start": 2233
+    },
+    {
+      "vo": 328,
+      "frames": 360,
+      "start": 2571
+    },
+    {
+      "vo": 341,
+      "frames": 368,
+      "start": 2921
+    },
+    {
+      "vo": 318,
+      "frames": 345,
+      "start": 3279
+    },
+    {
+      "vo": 63,
+      "frames": 150,
+      "start": 3614
+    }
+  ],
+  "total": 3764
+}
