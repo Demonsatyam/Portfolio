@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { FilmVideo } from "@/components/ui/FilmVideo";
 import { motion } from "motion/react";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitText } from "@/components/motion/SplitText";
@@ -82,10 +83,7 @@ export function Film() {
     <Chapter id="film" title="The two-minute version." intro="One commuter, one morning, one incident: the whole system in a narrated film. Every frame is code, built with Remotion. The walkthrough below lets you try each step yourself.">
       <Reveal>
         <div className="overflow-hidden rounded-3xl border border-(--cs-line) bg-black shadow-[0_40px_120px_-40px_rgba(56,211,240,0.35)]">
-          <video className="aspect-video w-full" controls preload="metadata" playsInline poster="/city-pulse/poster.jpg">
-            <source src="/city-pulse/city-pulse-film.mp4" type="video/mp4" />
-            <track kind="captions" src="/city-pulse/captions.vtt" srcLang="en" label="English" default />
-          </video>
+          <FilmVideo src="/city-pulse/city-pulse-film.mp4" poster="/city-pulse/poster.jpg" captions="/city-pulse/captions.vtt" />
         </div>
         <p className="mt-4 text-sm text-(--cs-muted)">2:05 · narrated · captions on · demo data throughout</p>
       </Reveal>

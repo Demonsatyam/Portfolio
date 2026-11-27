@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { FilmVideo } from "@/components/ui/FilmVideo";
 import { motion } from "motion/react";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitText } from "@/components/motion/SplitText";
@@ -113,10 +114,7 @@ export function Film() {
     <Chapter id="film" title="The six-minute version." intro="One user opens one website, and we follow a single packet all the way through the engine. Every frame is code, built with Remotion. The walkthrough below lets you try each step yourself.">
       <Reveal>
         <div className="overflow-hidden rounded-3xl border border-(--cs-line) bg-black shadow-[0_40px_120px_-40px_rgba(0,212,255,0.35)]">
-          <video className="aspect-video w-full" controls preload="metadata" playsInline poster="/dpi/poster.jpg">
-            <source src="/dpi/dpi-engine-film.mp4" type="video/mp4" />
-            <track kind="captions" src="/dpi/captions.vtt" srcLang="en" label="English" default />
-          </video>
+          <FilmVideo src="/dpi/dpi-engine-film.mp4" poster="/dpi/poster.jpg" captions="/dpi/captions.vtt" />
         </div>
         <p className="mt-4 text-sm text-(--cs-muted)">5:54 · narrated · captions on · sample values throughout</p>
       </Reveal>
