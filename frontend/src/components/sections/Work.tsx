@@ -7,7 +7,7 @@ import { projects } from "@/data/portfolio";
 const reelLabels = {
   identity: "Animation: records from five sources merge into one customer profile while query time drops from 450 to 120 milliseconds.",
   dpi: "Animation: network packets pass through a classifier and are sorted into protocol lanes.",
-  citypulse: "Animation: an AI agent plans, calls tools and retrieves documents before answering a traffic question.",
+  citypulse: "Animation: posts about a road converge on an incident, City Pulse agents verify it, predict the queue spreading, and alert a commuter with an alternative route.",
 };
 
 export function Work() {
