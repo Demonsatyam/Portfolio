@@ -12,7 +12,7 @@ const pages: Partial<Record<(typeof projects)[number]["id"], { href: string; lab
 
 const reelLabels = {
   identity: "Animation: records from five sources merge into one customer profile while query time drops from 450 to 120 milliseconds.",
-  dpi: "Animation: network packets pass through a classifier and are sorted into protocol lanes.",
+  dpi: "Animation: packets from a capture file are parsed, identified by their TLS SNI hostname and sorted into application lanes; YouTube traffic is dropped by a blocking rule, the rest is forwarded.",
   citypulse: "Animation: posts about a road converge on an incident, City Pulse agents verify it, predict the queue spreading, and alert a commuter with an alternative route.",
 };
 

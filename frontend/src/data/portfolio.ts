@@ -27,13 +27,13 @@ export const projects: {
   metrics: string[];
 }[] = [
   {
-    id: "identity",
-    title: "Identity Resolution Service",
-    tag: "Microservice",
-    stack: ["Node.js", "PostgreSQL", "Docker", "TDD"],
+    id: "citypulse",
+    title: "City Pulse",
+    tag: "Agentic AI",
+    stack: ["Google ADK", "Gemini", "PostgreSQL + PGVector", "Firebase"],
     blurb:
-      "Reconciles customer identities by email and phone across 5+ data sources behind a single /identify endpoint, on a normalized PostgreSQL schema.",
-    metrics: ["85% duplicates removed", "450ms → 120ms queries", "99.2% accuracy"],
+      "A multi-agent system that spots traffic incidents early from social posts, citizen uploads, and traffic and weather data. It verifies them, predicts how the queue spreads, alerts commuters on affected routes with an alternative, and informs the nearest traffic station.",
+    metrics: ["2nd Runner-Up", "Google Agentic AI Day 2025"],
   },
   {
     id: "dpi",
@@ -41,17 +41,17 @@ export const projects: {
     tag: "Networking",
     stack: ["Python", "Linux", "TCP/IP"],
     blurb:
-      "A fault-tolerant packet-processing pipeline on Linux that classifies traffic across 15+ protocol signatures, with root-cause tooling for faster recovery.",
+      "A deep packet inspection engine that reads PCAP captures, parses Ethernet, IPv4, TCP and UDP, tracks connections by Five-Tuple, and identifies applications from the TLS SNI or HTTP Host, without decrypting anything. IP, app and domain rules block whole flows, and multithreaded workers write a filtered capture and a processing report.",
     metrics: ["1,000+ packets/sec", "94% precision", "MTTR 50 → 20 min"],
   },
   {
-    id: "citypulse",
-    title: "City Pulse",
-    tag: "Agentic AI",
-    stack: ["LangChain", "RAG", "Vector DB", "Gemini"],
+    id: "identity",
+    title: "Identity Resolution Service",
+    tag: "Microservice",
+    stack: ["Node.js", "PostgreSQL", "Docker", "TDD"],
     blurb:
-      "An agentic AI system with multi-step reasoning and tool use, grounded by a RAG pipeline on a vector database for semantic retrieval.",
-    metrics: ["2nd Runner-Up", "Google Agentic AI Day 2025"],
+      "Reconciles customer identities by email and phone across 5+ data sources behind a single /identify endpoint, on a normalized PostgreSQL schema.",
+    metrics: ["85% duplicates removed", "450ms → 120ms queries", "99.2% accuracy"],
   },
 ];
 
